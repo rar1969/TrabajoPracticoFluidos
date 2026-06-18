@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>TP Interactivo – Mecánica de Fluidos | UTN – Tecnicatura en Logística</title>
+  <meta name="description" content="Trabajo Práctico Interactivo de Física: Mecánica de Fluidos. UTN – Tecnicatura en Logística."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ═══════════════ ENCABEZADO INSTITUCIONAL ═══════════════ -->
+<header class="inst-header">
+  <div class="inst-header__inner">
+    <div class="inst-logo">UTN</div>
+    <div class="inst-info">
+      <span class="inst-info__uni">Universidad Tecnológica Nacional</span>
+      <span class="inst-info__carrera">Tecnicatura Universitaria en Logística</span>
+      <span class="inst-info__materia">Física</span>
+    </div>
+    <div class="inst-prof">
+      <span>Ing. Prof. Rodolfo Aldo Rodríguez</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ TÍTULO DEL TP ═══════════════ -->
+<section class="hero">
+  <h1>Trabajo Práctico Interactivo</h1>
+  <p class="hero__sub">Mecánica de Fluidos — Hidrostática e Hidrodinámica</p>
+  <p class="hero__time">⏱ Tiempo estimado: 90 min</p>
+</section>
+
+<!-- ═══════════════ NAVEGACIÓN ═══════════════ -->
+<nav class="tab-nav" id="tabNav">
+  <button class="tab active" data-target="sec-densidad"><span class="tab__num">1</span>Densidad &amp; Presión</button>
+  <button class="tab" data-target="sec-pascal"><span class="tab__num">2</span>Ley de Pascal</button>
+  <button class="tab" data-target="sec-arquimedes"><span class="tab__num">3</span>Arquímedes</button>
+  <button class="tab" data-target="sec-continuidad"><span class="tab__num">4</span>Continuidad</button>
+  <button class="tab" data-target="sec-bernoulli"><span class="tab__num">5</span>Bernoulli</button>
+</nav>
+
+<main class="main">
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  SECCIÓN 1 — DENSIDAD & PRESIÓN                     ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<section id="sec-densidad" class="panel visible">
+
+  <!-- Teoría -->
+  <div class="card glass theory-card">
+    <h2>📐 Fórmulas Clave</h2>
+    <div class="formula-grid">
+      <div class="formula-item"><strong>Densidad</strong><br><em>δ</em> = m / V &nbsp; [kg/m³]</div>
+      <div class="formula-item"><strong>Presión</strong><br>P = F / A &nbsp; [Pa]</div>
+      <div class="formula-item"><strong>Presión manométrica o hidrostática</strong><br>P<sub>man</sub> = <em>δ</em>·g·h</div>
+      <div class="formula-item"><strong>Presión absoluta</strong><br>P<sub>abs</sub> = P₀ + <em>δ</em>·g·h</div>
+      <div class="formula-item"><strong>P<sub>atm</sub></strong><br>≈ 101 325 Pa ≈ 1 atm</div>
+    </div>
+    <details class="fluid-table-toggle">
+      <summary>📊 Tabla de densidades</summary>
+      <table class="fluid-table">
+        <thead><tr><th>Fluido</th><th><em>δ</em> [kg/m³]</th></tr></thead>
+        <tbody>
+          <tr><td>Agua (20 °C)</td><td>998</td></tr>
+          <tr><td>Gasoil</td><td>840 – 860</td></tr>
+          <tr><td>Nafta</td><td>720 – 780</td></tr>
+          <tr><td>Aceite hidráulico</td><td>870</td></tr>
+          <tr><td>Aire (20 °C, 1 atm)</td><td>1,20</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </div>
+
+  <!-- Ejemplo Resuelto Interactivo -->
+  <div class="card glass example-card">
+    <h2>✅ Ejemplo Resuelto — Presión a profundidad</h2>
+    <p class="example-statement">Un buzo se sumerge en un lago de agua dulce (<em>δ</em> = 998 kg/m³). Calcule la presión manométrica o hidrostática y la presión absoluta a la profundidad indicada.</p>
+    <div class="sim-row">
+      <!-- SVG Simulador -->
+      <div class="sim-visual">
+        <svg id="svg-tank1" viewBox="0 0 220 300" class="sim-svg">
+          <!-- tanque -->
+          <rect x="40" y="20" width="140" height="260" rx="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <!-- agua -->
+          <rect id="tank1-water" x="42" y="22" width="136" height="256" rx="4" fill="url(#waterGrad1)" opacity="0.7"/>
+          <!-- flecha h -->
+          <line id="tank1-arrow" x1="30" y1="22" x2="30" y2="278" stroke="var(--yellow)" stroke-width="2" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+          <text id="tank1-hLabel" x="10" y="150" fill="var(--yellow)" font-size="13" font-family="Outfit">h</text>
+          <!-- defs -->
+          <defs>
+            <linearGradient id="waterGrad1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#0369a1" stop-opacity="0.8"/>
+            </linearGradient>
+            <marker id="arrowUp" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="0"><path d="M0,6 L4,0 L8,6 Z" fill="var(--yellow)"/></marker>
+            <marker id="arrowDown" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="0"><path d="M0,0 L4,6 L8,0 Z" fill="var(--yellow)"/></marker>
+          </defs>
+          <!-- superficie -->
+          <text x="110" y="16" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="Outfit">P₀ = P_atm</text>
+          <!-- fondo -->
+          <text id="tank1-pLabel" x="110" y="295" fill="var(--accent)" font-size="11" text-anchor="middle" font-family="Outfit">P = ?</text>
+        </svg>
+      </div>
+      <!-- Controles -->
+      <div class="sim-controls">
+        <label>Profundidad h (m)
+          <input type="range" id="ex1-h" min="0.5" max="50" step="0.5" value="15"/>
+          <span class="range-val" id="ex1-h-val">15</span>
+        </label>
+        <label>Densidad fluido <em>δ</em> (kg/m³)
+          <select id="ex1-fluid">
+            <option value="998" selected>Agua (998)</option>
+            <option value="850">Gasoil (850)</option>
+            <option value="750">Nafta (750)</option>
+            <option value="870">Aceite hidráulico (870)</option>
+            <option value="1025">Agua de mar (1025)</option>
+          </select>
+        </label>
+        <button class="btn-calc" id="btn-ex1">Calcular</button>
+      </div>
+    </div>
+    <!-- Solución paso a paso -->
+    <div class="steps" id="steps-ex1"></div>
+  </div>
+
+  <!-- Ejercicios Propuestos -->
+  <div class="card glass exercises-card">
+    <h2>✏️ Ejercicios Propuestos</h2>
+
+    <div class="exercise" id="ej-1-1">
+      <p class="ej-num">Ejercicio 1.1</p>
+      <p>Un tanque de agua de <strong>3,5 m</strong> de altura está completamente lleno y abierto a la atmósfera (<em>δ</em> = 998 kg/m³, P<sub>atm</sub> = 101 325 Pa). Calcule la <strong>presión absoluta</strong> en el fondo del tanque.</p>
+      <div class="answer-row">
+        <label>P<sub>abs</sub> (Pa) = <input type="number" class="answer-input" id="ans-1-1" step="any"/></label>
+        <button class="btn-check" data-exercise="1-1">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-1-1"></div>
+    </div>
+
+    <div class="exercise" id="ej-1-2">
+      <p class="ej-num">Ejercicio 1.2</p>
+      <p>Una ventana circular de un submarino tiene un diámetro de <strong>30 cm</strong>. El submarino navega en agua de mar (<em>δ</em> = 1025 kg/m³) a <strong>120 m</strong> de profundidad. Determine la fuerza neta que ejerce el agua sobre la ventana.</p>
+      <div class="answer-row">
+        <label>F (N) = <input type="number" class="answer-input" id="ans-1-2" step="any"/></label>
+        <button class="btn-check" data-exercise="1-2">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-1-2"></div>
+    </div>
+
+    <div class="exercise" id="ej-1-3">
+      <p class="ej-num">Ejercicio 1.3</p>
+      <p>Un tanque contiene nafta (<em>δ</em> = 750 kg/m³). Un manómetro en el fondo indica <strong>44 100 Pa</strong> (presión manométrica o hidrostática). ¿Cuál es la altura del combustible?</p>
+      <div class="answer-row">
+        <label>h (m) = <input type="number" class="answer-input" id="ans-1-3" step="any"/></label>
+        <button class="btn-check" data-exercise="1-3">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-1-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  SECCIÓN 2 — LEY DE PASCAL                          ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<section id="sec-pascal" class="panel">
+
+  <div class="card glass theory-card">
+    <h2>📐 Fórmulas Clave</h2>
+    <div class="formula-grid">
+      <div class="formula-item"><strong>Ley de Pascal</strong><br>F₁/A₁ = F₂/A₂</div>
+      <div class="formula-item"><strong>Fuerza de salida</strong><br>F₂ = F₁ · (A₂/A₁)</div>
+      <div class="formula-item"><strong>Ventaja Mecánica</strong><br>VM = A₂ / A₁ = F₂ / F₁</div>
+    </div>
+  </div>
+
+  <div class="card glass example-card">
+    <h2>✅ Ejemplo Resuelto — Prensa Hidráulica</h2>
+    <p class="example-statement">Una prensa hidráulica tiene un pistón de entrada (d₁) y uno de salida (d₂). Se aplica una fuerza F₁ en el pistón pequeño. Calcule la fuerza de salida y la ventaja mecánica.</p>
+    <div class="sim-row">
+      <div class="sim-visual">
+        <svg id="svg-pascal" viewBox="0 -20 360 220" class="sim-svg">
+          <defs>
+            <linearGradient id="oilGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#d97706" stop-opacity="0.9"/>
+            </linearGradient>
+            <marker id="arrowDownY2" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="0"><path d="M0,0 L4,6 L8,0 Z" fill="var(--yellow)"/></marker>
+            <marker id="arrowUpG3" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="0"><path d="M0,6 L4,0 L8,6 Z" fill="var(--green)"/></marker>
+            <pattern id="hatch" patternUnits="userSpaceOnUse" width="4" height="4">
+              <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" stroke="#64748b" stroke-width="1"/>
+            </pattern>
+          </defs>
+          
+          <!-- Contorno exterior e interior de la prensa -->
+          <path d="M 30,20 L 30,175 Q 30,180 35,180 L 295,180 Q 300,180 300,175 L 300,20" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <path d="M 70,20 L 70,135 Q 70,140 75,140 L 175,140 Q 180,140 180,135 L 180,20" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          
+          <!-- Fluido hidráulico -->
+          <path id="pascal-fluid" d="M 32,70 L 68,70 L 68,138 L 182,138 L 182,50 L 298,50 L 298,178 L 32,178 Z" fill="url(#oilGrad)"/>
+          
+          <!-- Pistón Pequeño -->
+          <rect id="pascal-p1" x="32" y="55" width="36" height="15" fill="url(#hatch)"/>
+          <rect x="32" y="55" width="36" height="15" fill="none" stroke="#94a3b8" stroke-width="1"/>
+          <!-- Vástago 1 -->
+          <rect x="46" y="20" width="8" height="35" fill="#94a3b8"/>
+          
+          <!-- Pistón Grande -->
+          <rect id="pascal-p2" x="182" y="35" width="116" height="15" fill="url(#hatch)"/>
+          <rect x="182" y="35" width="116" height="15" fill="none" stroke="#94a3b8" stroke-width="1"/>
+          <!-- Carga -->
+          <rect x="200" y="5" width="80" height="30" rx="3" fill="#ef4444" opacity="0.9"/>
+          <text x="240" y="25" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle" font-family="Outfit">CARGA</text>
+
+          <!-- Flecha F1 (Entrada) -->
+          <line x1="50" y1="0" x2="50" y2="18" stroke="var(--yellow)" stroke-width="2" marker-end="url(#arrowDownY2)"/>
+          <text x="50" y="-5" fill="var(--yellow)" font-size="12" text-anchor="middle" font-family="Outfit">F₁</text>
+
+          <!-- Flecha F2 (Salida - Empuje hacia arriba) -->
+          <line x1="285" y1="30" x2="285" y2="5" stroke="var(--green)" stroke-width="2" marker-end="url(#arrowUpG3)"/>
+          <text x="285" y="-5" fill="var(--green)" font-size="12" text-anchor="middle" font-family="Outfit">F₂</text>
+
+          <!-- Etiquetas de Área -->
+          <text x="50" y="195" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="Outfit">A₁ (d₁)</text>
+          <text x="240" y="195" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="Outfit">A₂ (d₂)</text>
+        </svg>
+      </div>
+      <div class="sim-controls">
+        <label>Fuerza F₁ (N)
+          <input type="range" id="ex2-F" min="10" max="500" step="5" value="150"/>
+          <span class="range-val" id="ex2-F-val">150</span>
+        </label>
+        <label>Diámetro d₁ (cm)
+          <input type="range" id="ex2-d1" min="1" max="20" step="0.5" value="4"/>
+          <span class="range-val" id="ex2-d1-val">4</span>
+        </label>
+        <label>Diámetro d₂ (cm)
+          <input type="range" id="ex2-d2" min="5" max="60" step="0.5" value="20"/>
+          <span class="range-val" id="ex2-d2-val">20</span>
+        </label>
+        <button class="btn-calc" id="btn-ex2">Calcular</button>
+      </div>
+    </div>
+    <div class="steps" id="steps-ex2"></div>
+  </div>
+
+  <div class="card glass exercises-card">
+    <h2>✏️ Ejercicios Propuestos</h2>
+
+    <div class="exercise" id="ej-2-1">
+      <p class="ej-num">Ejercicio 2.1</p>
+      <p>Prensa hidráulica: A₁ = 8 cm², A₂ = 320 cm². Se aplica F₁ = 120 N. a) ¿F₂? b) ¿Ventaja mecánica?</p>
+      <div class="answer-row">
+        <label>F₂ (N) = <input type="number" class="answer-input" id="ans-2-1a" step="any"/></label>
+        <label>VM = <input type="number" class="answer-input" id="ans-2-1b" step="any"/></label>
+        <button class="btn-check" data-exercise="2-1">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-2-1"></div>
+    </div>
+
+    <div class="exercise" id="ej-2-2">
+      <p class="ej-num">Ejercicio 2.2</p>
+      <p>Se necesita levantar camiones de 4500 kg (P ≈ 44 100 N). El pistón grande tiene d₂ = 30 cm y la fuerza máxima aplicable es 250 N. ¿Cuál debe ser el diámetro máximo del pistón pequeño?</p>
+      <div class="answer-row">
+        <label>d₁ (cm) = <input type="number" class="answer-input" id="ans-2-2" step="any"/></label>
+        <button class="btn-check" data-exercise="2-2">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-2-2"></div>
+    </div>
+
+    <div class="exercise" id="ej-2-3">
+      <p class="ej-num">Ejercicio 2.3</p>
+      <p>En un sistema de frenos hidráulicos, el cilindro maestro tiene A₁ = 4,5 cm² y cada cilindro de rueda tiene A₂ = 18 cm². Si se aplica F₁ = 90 N al cilindro maestro, ¿qué fuerza actúa en cada rueda?</p>
+      <div class="answer-row">
+        <label>F₂ (N) = <input type="number" class="answer-input" id="ans-2-3" step="any"/></label>
+        <button class="btn-check" data-exercise="2-3">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-2-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  SECCIÓN 3 — PRINCIPIO DE ARQUÍMEDES                ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<section id="sec-arquimedes" class="panel">
+
+  <div class="card glass theory-card">
+    <h2>📐 Fórmulas Clave</h2>
+    <div class="formula-grid">
+      <div class="formula-item"><strong>Empuje</strong><br>E = <em>δ</em><sub>fluido</sub> · V<sub>sum</sub> · g</div>
+      <div class="formula-item"><strong>Flotación</strong><br>V<sub>sum</sub>/V<sub>total</sub> = <em>δ</em><sub>cuerpo</sub>/<em>δ</em><sub>fluido</sub></div>
+      <div class="formula-item"><strong>E &gt; P → flota</strong><br><strong>E = P → neutro</strong><br><strong>E &lt; P → se hunde</strong></div>
+    </div>
+  </div>
+
+  <div class="card glass example-card">
+    <h2>✅ Ejemplo Resuelto — Bloque flotante</h2>
+    <p class="example-statement">Un bloque de volumen V y densidad <em>δ</em><sub>bloque</sub> se coloca en agua dulce (<em>δ</em> = 998 kg/m³). Determine el empuje y el volumen sumergido.</p>
+    <div class="sim-row">
+      <div class="sim-visual">
+        <svg id="svg-arq" viewBox="0 0 240 300" class="sim-svg">
+          <!-- agua -->
+          <rect x="20" y="120" width="200" height="160" rx="6" fill="url(#waterGrad1)" opacity="0.55"/>
+          <line x1="20" y1="120" x2="220" y2="120" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6,4"/>
+          <text x="225" y="124" fill="var(--accent)" font-size="10" font-family="Outfit">sup.</text>
+          <!-- bloque -->
+          <rect id="arq-block" x="70" y="90" width="100" height="80" rx="6" fill="var(--yellow)" opacity="0.8"/>
+          <!-- flechas E y W -->
+          <line id="arq-E" x1="120" y1="130" x2="120" y2="80" stroke="var(--green)" stroke-width="3" marker-end="url(#arrowUpG)"/>
+          <text id="arq-E-label" x="135" y="100" fill="var(--green)" font-size="12" font-family="Outfit">E</text>
+          <line id="arq-W" x1="120" y1="130" x2="120" y2="180" stroke="#ef4444" stroke-width="3" marker-end="url(#arrowDownR)"/>
+          <text id="arq-W-label" x="135" y="160" fill="#ef4444" font-size="12" font-family="Outfit">P</text>
+          <defs>
+            <marker id="arrowUpG" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="0"><path d="M0,6 L4,0 L8,6 Z" fill="var(--green)"/></marker>
+            <marker id="arrowDownR" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="0"><path d="M0,0 L4,6 L8,0 Z" fill="#ef4444"/></marker>
+          </defs>
+        </svg>
+      </div>
+      <div class="sim-controls">
+        <label>Densidad bloque <em>δ</em> (kg/m³)
+          <input type="range" id="ex3-rho" min="50" max="2000" step="10" value="700"/>
+          <span class="range-val" id="ex3-rho-val">700</span>
+        </label>
+        <label>Volumen bloque V (m³)
+          <input type="range" id="ex3-vol" min="0.01" max="0.5" step="0.01" value="0.08"/>
+          <span class="range-val" id="ex3-vol-val">0.08</span>
+        </label>
+        <button class="btn-calc" id="btn-ex3">Calcular</button>
+      </div>
+    </div>
+    <div class="steps" id="steps-ex3"></div>
+  </div>
+
+  <div class="card glass exercises-card">
+    <h2>✏️ Ejercicios Propuestos</h2>
+
+    <div class="exercise" id="ej-3-1">
+      <p class="ej-num">Ejercicio 3.1</p>
+      <p>Una boya de poliestireno expandido (<em>δ</em> = 20 kg/m³, V = 0,5 m³) flota en agua (<em>δ</em> = 1000 kg/m³). a) ¿Qué fracción del volumen queda sumergida? b) ¿Cuánta masa adicional puede soportar antes de sumergirse totalmente?</p>
+      <div class="answer-row">
+        <label>Fracción = <input type="number" class="answer-input" id="ans-3-1a" step="any" placeholder="ej: 0.02"/></label>
+        <label>Carga adicional (kg) = <input type="number" class="answer-input" id="ans-3-1b" step="any"/></label>
+        <button class="btn-check" data-exercise="3-1">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-3-1"></div>
+    </div>
+
+    <div class="exercise" id="ej-3-2">
+      <p class="ej-num">Ejercicio 3.2</p>
+      <p>Estatua de piedra (<em>δ</em> = 2600 kg/m³, V = 0,04 m³) en el fondo de una piscina (<em>δ</em> = 998 kg/m³). Calcule: a) Peso real. b) Empuje. c) Peso aparente (fuerza para levantarla sumergida).</p>
+      <div class="answer-row">
+        <label>P (N) = <input type="number" class="answer-input" id="ans-3-2a" step="any"/></label>
+        <label>E (N) = <input type="number" class="answer-input" id="ans-3-2b" step="any"/></label>
+        <label>P<sub>ap</sub> (N) = <input type="number" class="answer-input" id="ans-3-2c" step="any"/></label>
+        <button class="btn-check" data-exercise="3-2">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-3-2"></div>
+    </div>
+
+    <div class="exercise" id="ej-3-3">
+      <p class="ej-num">Ejercicio 3.3</p>
+      <p>Un bloque pesa 5,0 N en el aire. Sumergido totalmente en agua (<em>δ</em> = 1000 kg/m³), el dinamómetro marca 3,8 N. Calcule: a) Empuje. b) Volumen del bloque (m³). c) Densidad del material (kg/m³).</p>
+      <div class="answer-row">
+        <label>E (N) = <input type="number" class="answer-input" id="ans-3-3a" step="any"/></label>
+        <label>V (m³) = <input type="number" class="answer-input" id="ans-3-3b" step="any"/></label>
+        <label><em>δ</em> (kg/m³) = <input type="number" class="answer-input" id="ans-3-3c" step="any"/></label>
+        <button class="btn-check" data-exercise="3-3">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-3-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  SECCIÓN 4 — ECUACIÓN DE CONTINUIDAD                ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<section id="sec-continuidad" class="panel">
+
+  <div class="card glass theory-card">
+    <h2>📐 Fórmulas Clave</h2>
+    <div class="formula-grid">
+      <div class="formula-item"><strong>Continuidad</strong><br>A₁·v₁ = A₂·v₂ = Q</div>
+      <div class="formula-item"><strong>Caudal</strong><br>Q = A·v &nbsp; [m³/s]</div>
+      <div class="formula-item"><strong>Área circular</strong><br>A = π·d²/4</div>
+    </div>
+  </div>
+
+  <div class="card glass example-card">
+    <h2>✅ Ejemplo Resuelto — Tubería con cambio de sección</h2>
+    <p class="example-statement">Agua circula por una tubería circular de diámetro d₁ a velocidad v₁. La tubería se estrecha a diámetro d₂. Calcule la velocidad v₂ y el caudal Q.</p>
+    <div class="sim-row">
+      <div class="sim-visual">
+        <svg id="svg-cont" viewBox="0 0 360 160" class="sim-svg">
+          <!-- tubo ancho -->
+          <rect x="10" y="30" width="150" height="100" rx="8" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="12" y="32" width="146" height="96" rx="6" fill="url(#waterGrad1)" opacity="0.4"/>
+          <!-- tubo angosto -->
+          <rect x="200" y="55" width="150" height="50" rx="8" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <rect x="202" y="57" width="146" height="46" rx="6" fill="url(#waterGrad1)" opacity="0.55"/>
+          <!-- transición -->
+          <polygon points="160,30 200,55 200,105 160,130" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <polygon points="160,32 200,57 200,103 160,128" fill="url(#waterGrad1)" opacity="0.45"/>
+          <!-- flechas velocidad -->
+          <text x="85" y="25" fill="var(--text-muted)" font-size="11" text-anchor="middle" font-family="Outfit">v₁ → d₁</text>
+          <text x="275" y="50" fill="var(--yellow)" font-size="11" text-anchor="middle" font-family="Outfit">v₂ → d₂</text>
+          <!-- partículas animadas -->
+          <circle class="particle p-slow" cx="30" cy="80" r="3" fill="var(--accent)"/>
+          <circle class="particle p-slow" cx="70" cy="75" r="3" fill="var(--accent)"/>
+          <circle class="particle p-slow" cx="110" cy="85" r="3" fill="var(--accent)"/>
+          <circle class="particle p-fast" cx="220" cy="80" r="3" fill="var(--yellow)"/>
+          <circle class="particle p-fast" cx="260" cy="78" r="3" fill="var(--yellow)"/>
+          <circle class="particle p-fast" cx="310" cy="80" r="3" fill="var(--yellow)"/>
+        </svg>
+      </div>
+      <div class="sim-controls">
+        <label>Diámetro d₁ (cm)
+          <input type="range" id="ex4-d1" min="2" max="20" step="0.5" value="8"/>
+          <span class="range-val" id="ex4-d1-val">8</span>
+        </label>
+        <label>Velocidad v₁ (m/s)
+          <input type="range" id="ex4-v1" min="0.1" max="10" step="0.1" value="1.5"/>
+          <span class="range-val" id="ex4-v1-val">1.5</span>
+        </label>
+        <label>Diámetro d₂ (cm)
+          <input type="range" id="ex4-d2" min="1" max="20" step="0.5" value="4"/>
+          <span class="range-val" id="ex4-d2-val">4</span>
+        </label>
+        <button class="btn-calc" id="btn-ex4">Calcular</button>
+      </div>
+    </div>
+    <div class="steps" id="steps-ex4"></div>
+  </div>
+
+  <div class="card glass exercises-card">
+    <h2>✏️ Ejercicios Propuestos</h2>
+
+    <div class="exercise" id="ej-4-1">
+      <p class="ej-num">Ejercicio 4.1</p>
+      <p>Una manguera de jardín (d = 2,0 cm) con v₁ = 1,2 m/s se conecta a una boquilla de d = 0,5 cm. a) ¿Velocidad de salida? b) ¿Caudal en L/min?</p>
+      <div class="answer-row">
+        <label>v₂ (m/s) = <input type="number" class="answer-input" id="ans-4-1a" step="any"/></label>
+        <label>Q (L/min) = <input type="number" class="answer-input" id="ans-4-1b" step="any"/></label>
+        <button class="btn-check" data-exercise="4-1">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-4-1"></div>
+    </div>
+
+    <div class="exercise" id="ej-4-2">
+      <p class="ej-num">Ejercicio 4.2</p>
+      <p>Se llena un recipiente de 20 L en 1,5 minutos. Si el diámetro de salida del grifo es 1,5 cm, ¿cuál debe ser la velocidad media del agua?</p>
+      <div class="answer-row">
+        <label>v (m/s) = <input type="number" class="answer-input" id="ans-4-2" step="any"/></label>
+        <button class="btn-check" data-exercise="4-2">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-4-2"></div>
+    </div>
+
+    <div class="exercise" id="ej-4-3">
+      <p class="ej-num">Ejercicio 4.3</p>
+      <p>Una tubería principal (v = 2,5 m/s) se ramifica en 4 tuberías idénticas, cada una con la mitad del diámetro de la principal. ¿Velocidad en cada ramificación?</p>
+      <div class="answer-row">
+        <label>v<sub>rama</sub> (m/s) = <input type="number" class="answer-input" id="ans-4-3" step="any"/></label>
+        <button class="btn-check" data-exercise="4-3">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-4-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗
+     ║  SECCIÓN 5 — ECUACIÓN DE BERNOULLI                  ║
+     ╚══════════════════════════════════════════════════════╝ -->
+<section id="sec-bernoulli" class="panel">
+
+  <div class="card glass theory-card">
+    <h2>📐 Fórmulas Clave</h2>
+    <div class="formula-grid">
+      <div class="formula-item"><strong>Bernoulli</strong><br>P + ½<em>δ</em>v² + <em>δ</em>gh = cte</div>
+      <div class="formula-item"><strong>Torricelli</strong><br>v = √(2gh)</div>
+      <div class="formula-item"><strong>Caudal</strong><br>Q = A · v = V / t</div>
+    </div>
+  </div>
+
+  <div class="card glass example-card">
+    <h2>✅ Ejemplo Resuelto — Descarga de tanque (Torricelli)</h2>
+    <p class="example-statement">Un tanque abierto contiene nafta (<em>δ</em> = 750 kg/m³) a una altura h sobre un orificio de descarga de 2 cm de diámetro. Calcule la velocidad de salida y el caudal.</p>
+    <div class="sim-row">
+      <div class="sim-visual">
+        <svg id="svg-bern" viewBox="0 0 280 280" class="sim-svg">
+          <defs>
+            <linearGradient id="fuelGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#b45309" stop-opacity="0.7"/>
+            </linearGradient>
+            <marker id="bern-arrowUp" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="0"><path d="M0,6 L4,0 L8,6 Z" fill="var(--green)"/></marker>
+            <marker id="bern-arrowDown" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="0"><path d="M0,0 L4,6 L8,0 Z" fill="var(--green)"/></marker>
+          </defs>
+          <!-- tanque -->
+          <rect x="30" y="20" width="140" height="220" rx="6" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <rect id="bern-water" x="32" y="22" width="136" height="216" rx="4" fill="url(#fuelGrad)" opacity="0.6"/>
+          <!-- orificio -->
+          <rect x="170" y="210" width="80" height="16" rx="4" fill="none" stroke="var(--yellow)" stroke-width="2"/>
+          <!-- chorro -->
+          <line x1="250" y1="218" x2="275" y2="230" stroke="var(--yellow)" stroke-width="3" stroke-linecap="round"/>
+          <!-- flecha h -->
+          <line x1="20" y1="22" x2="20" y2="210" stroke="var(--green)" stroke-width="2" marker-start="url(#bern-arrowUp)" marker-end="url(#bern-arrowDown)"/>
+          <text x="8" y="120" fill="var(--green)" font-size="12" font-family="Outfit">h</text>
+          <!-- labels -->
+          <text x="100" y="14" fill="var(--text-muted)" font-size="10" text-anchor="middle" font-family="Outfit">P₀ = P_atm</text>
+          <text x="260" y="208" fill="var(--yellow)" font-size="11" font-family="Outfit">v = ?</text>
+        </svg>
+      </div>
+      <div class="sim-controls">
+        <label>Altura h (m)
+          <input type="range" id="ex5-h" min="0.5" max="10" step="0.1" value="3"/>
+          <span class="range-val" id="ex5-h-val">3</span>
+        </label>
+        <label>Diámetro salida (cm)
+          <input type="range" id="ex5-d" min="1" max="10" step="0.5" value="2"/>
+          <span class="range-val" id="ex5-d-val">2</span>
+        </label>
+        <button class="btn-calc" id="btn-ex5">Calcular</button>
+      </div>
+    </div>
+    <div class="steps" id="steps-ex5"></div>
+  </div>
+
+  <div class="card glass exercises-card">
+    <h2>✏️ Ejercicios Propuestos</h2>
+
+    <div class="exercise" id="ej-5-1">
+      <p class="ej-num">Ejercicio 5.1</p>
+      <p>Agua (<em>δ</em> = 998 kg/m³) en tubería horizontal: A₁ = 60 cm², v₁ = 2 m/s, P₁ = 180 000 Pa. Se reduce a A₂ = 15 cm². Calcule v₂ y P₂.</p>
+      <div class="answer-row">
+        <label>v₂ (m/s) = <input type="number" class="answer-input" id="ans-5-1a" step="any"/></label>
+        <label>P₂ (Pa) = <input type="number" class="answer-input" id="ans-5-1b" step="any"/></label>
+        <button class="btn-check" data-exercise="5-1">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-5-1"></div>
+    </div>
+
+    <div class="exercise" id="ej-5-2">
+      <p class="ej-num">Ejercicio 5.2</p>
+      <p>Un camión cisterna de 20 000 L de gasoil (<em>δ</em> = 845 kg/m³) descarga por gravedad con una manguera de d = 5 cm. El nivel promedio es 2 m sobre la boca de salida. Calcule: a) v de salida, b) Q en L/s, c) Tiempo de descarga (min).</p>
+      <div class="answer-row">
+        <label>v (m/s) = <input type="number" class="answer-input" id="ans-5-2a" step="any"/></label>
+        <label>Q (L/s) = <input type="number" class="answer-input" id="ans-5-2b" step="any"/></label>
+        <label>t (min) = <input type="number" class="answer-input" id="ans-5-2c" step="any"/></label>
+        <button class="btn-check" data-exercise="5-2">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-5-2"></div>
+    </div>
+
+    <div class="exercise" id="ej-5-3">
+      <p class="ej-num">Ejercicio 5.3</p>
+      <p>Medidor Venturi: A₁ = 200 cm², v₁ = 1,2 m/s, P₁ manométrica o hidrostática = 50 kPa. ¿Cuál debe ser A₂ para que la presión manométrica o hidrostática en ese punto sea cero? (<em>δ</em> = 1000 kg/m³)</p>
+      <div class="answer-row">
+        <label>A₂ (cm²) = <input type="number" class="answer-input" id="ans-5-3" step="any"/></label>
+        <button class="btn-check" data-exercise="5-3">Verificar</button>
+      </div>
+      <div class="feedback" id="fb-5-3"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>UTN — Tecnicatura Universitaria en Logística — Física — 2025</p>
+  <p>Ing. Prof. Rodolfo Aldo Rodríguez</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
